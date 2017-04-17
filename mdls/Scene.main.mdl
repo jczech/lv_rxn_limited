@@ -1,0 +1,41 @@
+ITERATIONS = 500
+TIME_STEP = 1e-6
+VACANCY_SEARCH_DISTANCE = 10
+
+INCLUDE_FILE = "Scene.initialization.mdl"
+
+PARTITION_X = [[-0.25 TO 0.25 STEP 0.0199999995529652]]
+PARTITION_Y = [[-0.25 TO 0.25 STEP 0.0199999995529652]]
+PARTITION_Z = [[-0.00749999983236194 TO 0.00749999983236194 STEP 0.0149999996647239]]
+
+INCLUDE_FILE = "Scene.molecules.mdl"
+
+INCLUDE_FILE = "Scene.reactions.mdl"
+
+INCLUDE_FILE = "Scene.geometry.mdl"
+
+INSTANTIATE Scene OBJECT
+{
+  Cube OBJECT Cube {}
+  rel_prey RELEASE_SITE
+  {
+   SHAPE = Scene.Cube
+   MOLECULE = prey
+   NUMBER_TO_RELEASE = 1000
+   RELEASE_PROBABILITY = 1
+  }
+  rel_predator RELEASE_SITE
+  {
+   SHAPE = Scene.Cube
+   MOLECULE = predator
+   NUMBER_TO_RELEASE = 1000
+   RELEASE_PROBABILITY = 1
+  }
+}
+
+sprintf(seed,"%05g",SEED)
+
+INCLUDE_FILE = "Scene.viz_output.mdl"
+
+INCLUDE_FILE = "Scene.rxn_output.mdl"
+
